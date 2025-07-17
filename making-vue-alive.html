@@ -21,16 +21,28 @@
   <body>
     <div id="app">
       <div>{{message}}</div>
+      <div>Can you drive: {{canDrive}}</div>
     </div>
     <script>
-      // const { createApp, ref } = Vue;
-      // const App = {
-      //   setup() {
+      const { createApp, ref, computed } = Vue;
+      const App = {
+        setup() {
+          let message = ref("Hello");
+          let age = ref(null);
+          let canDrive = computed(() => {
+            return age.value >= 18 ? "Yes" : "No";
+          });
 
-      //   },
-      // };
+          setTimeout(() => {
+            console.log("Changed!");
+            age.value = 23;
+            message.value = "Bye!";
+          }, 5000);
+          return { message, canDrive };
+        },
+      };
 
-      // createApp(App).mount('#app');
+      createApp(App).mount("#app");
     </script>
   </body>
 </html>
